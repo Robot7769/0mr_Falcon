@@ -1,0 +1,385 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.1706986939831133 -0.156279843622464 -0.9728507420718748 3.956252452607624
+  position -0.5122224050521649 -0.9986351598337773 0.382835479332849
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 2
+}
+DEF falcon Robot {
+  children [
+    Transform {
+      children [
+        Group {
+          children [
+            Pose {
+            }
+          ]
+        }
+      ]
+    }
+    Pose {
+      translation -1.32 -0.5 0
+      children [
+        DEF kulicka BallJoint {
+          jointParameters BallJointParameters {
+            anchor -0.05 0 0.01
+          }
+          jointParameters2 JointParameters {
+            axis 1 1 1
+          }
+          endPoint Solid {
+            translation -0.050575987438896824 0.0009666442097727026 0.009183602863165895
+            rotation -0.14015147845362794 0.7968594437289697 0.5876840903301872 3.7292179224786364
+            children [
+              DEF kulicka Shape {
+                appearance PBRAppearance {
+                  baseColor 0.603922 0.6 0.588235
+                }
+                geometry Sphere {
+                  radius 0.01
+                }
+              }
+            ]
+            name "solid(6)"
+            boundingObject USE kulicka
+            physics Physics {
+              density -1
+              mass 0.01
+            }
+          }
+        }
+        DEF kulicka BallJoint {
+          jointParameters BallJointParameters {
+            anchor 0.26 0 0.01
+          }
+          jointParameters2 JointParameters {
+            axis 1 1 1
+          }
+          endPoint Solid {
+            translation 0.26 0 0.01
+            children [
+              DEF kulicka Shape {
+                appearance PBRAppearance {
+                  baseColor 0.603922 0.6 0.588235
+                }
+                geometry Sphere {
+                  radius 0.01
+                }
+              }
+            ]
+            name "solid(7)"
+            boundingObject USE kulicka
+            physics Physics {
+              density -1
+              mass 0.01
+            }
+          }
+        }
+        DEF kolo_R HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+            anchor 0.105 -0.08 0.032
+          }
+          endPoint Solid {
+            translation 0.1033544107560104 -0.08864922994631319 0.03204369347017947
+            rotation -0.9998985982481238 -0.010119875356725027 -0.010019049066743583 4.694136835524987
+            children [
+              DEF kolo Shape {
+                appearance PBRAppearance {
+                  baseColor 0.878431 0.105882 0.141176
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.03
+                }
+              }
+            ]
+            name "solid(4)"
+            boundingObject USE kolo
+            physics Physics {
+              density -1
+              mass 0.05
+            }
+          }
+        }
+        DEF kolo_L HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+            anchor 0.105 0.08 0.0319984
+          }
+          endPoint Solid {
+            translation 0.10526653774040656 0.07374001875436176 0.030454547654687462
+            rotation -0.9999880376834208 -0.003450128615862139 -0.0034671461745183377 4.691419563705206
+            children [
+              DEF kolo Shape {
+                appearance PBRAppearance {
+                  baseColor 0.878431 0.105882 0.141176
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.03
+                }
+              }
+            ]
+            name "solid(5)"
+            boundingObject USE kolo
+            physics Physics {
+              density -1
+              mass 0.05
+            }
+          }
+        }
+        DEF zadek Solid {
+          translation 0 0 0.04
+          children [
+            DEF zadek Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+              }
+              geometry Box {
+                size 0.14 0.18 0.045
+              }
+            }
+          ]
+          boundingObject USE zadek
+          physics Physics {
+            density -1
+            mass 0.5
+          }
+        }
+        DEF vrch Solid {
+          translation 0.105 0 0.065
+          children [
+            DEF vrch Shape {
+              appearance PBRAppearance {
+                baseColor 0.141176 0.121569 0.192157
+              }
+              geometry Box {
+                size 0.35 0.18 0.005
+              }
+            }
+          ]
+          name "solid(3)"
+          boundingObject USE vrch
+          physics Physics {
+            density -1
+            mass 0.2
+          }
+        }
+        DEF predek Solid {
+          translation 0.21 0 0.04
+          children [
+            DEF predek Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+              }
+              geometry Box {
+                size 0.14 0.18 0.045
+              }
+            }
+          ]
+          name "solid(1)"
+          boundingObject USE predek
+          physics Physics {
+            density -1
+            mass 0.4
+          }
+        }
+        DEF moroty Solid {
+          translation 0.105 0 0.04
+          children [
+            DEF mortory Shape {
+              appearance PBRAppearance {
+                baseColor 0.368627 0.360784 0.392157
+              }
+              geometry Box {
+                size 0.07 0.15 0.045
+              }
+            }
+          ]
+          name "solid(2)"
+          boundingObject USE mortory
+          physics Physics {
+            density -1
+            mass 0.7
+          }
+        }
+      ]
+    }
+  ]
+  physics Physics {
+    density -1
+    mass 2
+  }
+}
+Robot {
+  translation -1.08191 0.174483 0
+  rotation 0 0 1 0.261799
+  children [
+    Pose {
+      children [
+        DEF naklad Solid {
+          translation 0.07 0.17 0.0901
+          children [
+            DEF nakald Shape {
+              appearance PBRAppearance {
+                baseColor 0.101961 0.372549 0.705882
+                metalness 0
+              }
+              geometry Box {
+                size 0.06 0.24 0.18
+              }
+            }
+          ]
+          name "naklad(1)"
+          boundingObject USE nakald
+          physics Physics {
+            density -1
+            mass 0.5
+          }
+        }
+        DEF kabina Solid {
+          translation 0 0 0.0901
+          children [
+            DEF kabina Shape {
+              appearance PBRAppearance {
+                baseColor 0.101961 0.372549 0.705882
+                metalness 0
+              }
+              geometry Box {
+                size 0.2 0.1 0.18
+              }
+            }
+          ]
+          name "solid(1)"
+          boundingObject USE kabina
+          physics Physics {
+            density -1
+            mass 0.2
+          }
+        }
+      ]
+    }
+  ]
+  name "havarovany_nakladak"
+  physics Physics {
+    density -1
+    mass 1.5
+  }
+}
+DEF naklad_1 Solid {
+  translation -1.33 0.16 0.0305
+  rotation 0 0 1 0.523599
+  children [
+    DEF kostka Shape {
+      appearance PBRAppearance {
+        baseColor 0.14902 0.635294 0.411765
+        metalness 0
+      }
+      geometry Box {
+        size 0.06 0.06 0.06
+      }
+    }
+  ]
+  boundingObject USE kostka
+  physics Physics {
+    mass 0.3
+  }
+}
+DEF naklad_2 Solid {
+  translation -1.31098 0.0670591 0.0305
+  rotation 0 0 1 -5.307179586466759e-06
+  children [
+    DEF kostka Shape {
+      appearance PBRAppearance {
+        baseColor 0.14902 0.635294 0.411765
+        metalness 0
+      }
+      geometry Box {
+        size 0.06 0.06 0.06
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE kostka
+  physics Physics {
+    mass 0.3
+  }
+}
+DEF naklad_3 Solid {
+  translation -1.22036 0.0500953 0.0305
+  rotation 0 0 -1 -0.261795307179586
+  children [
+    DEF kostka Shape {
+      appearance PBRAppearance {
+        baseColor 0.14902 0.635294 0.411765
+        metalness 0
+      }
+      geometry Box {
+        size 0.06 0.06 0.06
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE kostka
+  physics Physics {
+    density -1
+    mass 0.15
+  }
+}
+DEF naklad_4 Solid {
+  translation -1.39928 0.09 0.0305
+  rotation 0 0 -1 4.692820414042842e-06
+  children [
+    DEF kostka Shape {
+      appearance PBRAppearance {
+        baseColor 0.14902 0.635294 0.411765
+        metalness 0
+      }
+      geometry Box {
+        size 0.06 0.06 0.06
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE kostka
+  physics Physics {
+    density -1
+    mass 0.15
+  }
+}
+DEF naklad_5 Solid {
+  translation -1.39062 -0.0350001 0.0305
+  rotation 0 0 1 -1.0472053071795866
+  children [
+    DEF kostka Shape {
+      appearance PBRAppearance {
+        baseColor 0.14902 0.635294 0.411765
+        metalness 0
+      }
+      geometry Box {
+        size 0.06 0.06 0.06
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE kostka
+  physics Physics {
+    density -1
+    mass 0.15
+  }
+}
