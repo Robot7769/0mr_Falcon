@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.1706986939831133 -0.156279843622464 -0.9728507420718748 3.956252452607624
-  position -0.5122224050521649 -0.9986351598337773 0.382835479332849
+  orientation -0.06669485788766108 0.22353864994008418 0.9724105449419548 1.4844069127491522
+  position -1.316732322206045 -1.6543792897018679 0.4643546127691362
 }
 TexturedBackground {
 }
@@ -18,19 +18,9 @@ RectangleArena {
   floorSize 3 2
 }
 DEF falcon Robot {
+  translation -1.32 -0.5 0
   children [
-    Transform {
-      children [
-        Group {
-          children [
-            Pose {
-            }
-          ]
-        }
-      ]
-    }
     Pose {
-      translation -1.32 -0.5 0
       children [
         DEF kulicka BallJoint {
           jointParameters BallJointParameters {
@@ -92,8 +82,16 @@ DEF falcon Robot {
             axis 0 1 0
             anchor 0.105 -0.08 0.032
           }
+          device [
+            RotationalMotor {
+              name "mR"
+            }
+            PositionSensor {
+              name "posR"
+            }
+          ]
           endPoint Solid {
-            translation 0.1033544107560104 -0.08864922994631319 0.03204369347017947
+            translation 0.105 -0.08 0.03
             rotation -0.9998985982481238 -0.010119875356725027 -0.010019049066743583 4.694136835524987
             children [
               DEF kolo Shape {
@@ -120,8 +118,16 @@ DEF falcon Robot {
             axis 0 1 0
             anchor 0.105 0.08 0.0319984
           }
+          device [
+            RotationalMotor {
+              name "mL"
+            }
+            PositionSensor {
+              name "posL"
+            }
+          ]
           endPoint Solid {
-            translation 0.10526653774040656 0.07374001875436176 0.030454547654687462
+            translation 0.105 0.08 0.03
             rotation -0.9999880376834208 -0.003450128615862139 -0.0034671461745183377 4.691419563705206
             children [
               DEF kolo Shape {
@@ -158,7 +164,7 @@ DEF falcon Robot {
           boundingObject USE zadek
           physics Physics {
             density -1
-            mass 0.5
+            mass 0.4
           }
         }
         DEF vrch Solid {
@@ -225,6 +231,7 @@ DEF falcon Robot {
     density -1
     mass 2
   }
+  controller "Falcon_lib"
 }
 Robot {
   translation -1.08191 0.174483 0
