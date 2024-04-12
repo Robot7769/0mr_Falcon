@@ -1,17 +1,17 @@
 // File:          Falcon_lib.cpp
 // Date:
-// Description:
-// Author:
-// Modifications:
+// Description: Falcon lib
+// Authors: Jan Škrabal, Veronika Jirmusová
 
-// You may need to add webots include files such as
-// <webots/DistanceSensor.hpp>, <webots/Motor.hpp>, etc.
-// and/or to add some other includes
 #include <webots/Robot.hpp>
 #include <webots/Motor.hpp>
+#include <webots/DistanceSensor.hpp>
+#include <webots/PositionSensor.hpp>
+#include <stdio.h>
 
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
+using namespace std;
 
 // This is the main program of your controller.
 // It creates an instance of your Robot instance, launches its
@@ -29,11 +29,14 @@ int main(int argc, char **argv) {
 
   // You should insert a getDevice-like function in order to get the
   // instance of a device of the robot. Something like:
-  //  Motor *motor = robot->getMotor("motorname");
-  //  DistanceSensor *ds = robot->getDistanceSensor("dsname");
-  //  ds->enable(timeStep);
+  DistanceSensor *ds = robot->getDistanceSensor("distance sensor");
+  ds->enable(timeStep);
   Motor *m0 = robot->getMotor("mR");
   Motor *m1 = robot->getMotor("mL");
+  PositionSensor *pos0 = m0->getPositionSensor();
+  pos0->enable(timeStep);
+  PositionSensor *pos1 = m1->getPositionSensor();
+  pos1->enable(timeStep);
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -46,8 +49,10 @@ int main(int argc, char **argv) {
 
     // Enter here functions to send actuator commands, like:
     //  motor->setPosition(10.0);
-    m0->setPosition(10.0);
-    m1->setPosition(10.0);
+    m0->setPosition(11.15);
+    m1->setPosition(0.0);
+    cout << "dis: " << ds->getValue() << " pos0: " << pos0->getValue() << " pos1: " << pos1->getValue()  << endl;
+    
   };
 
   // Enter here exit cleanup code.

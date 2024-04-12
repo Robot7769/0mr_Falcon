@@ -3,12 +3,13 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/mir/mir100/protos/Mir100UltrasonicSensor.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.06669485788766108 0.22353864994008418 0.9724105449419548 1.4844069127491522
-  position -1.316732322206045 -1.6543792897018679 0.4643546127691362
+  orientation -0.020161722141356763 0.9997428117456585 -0.010383415776128387 1.5344518471704656
+  position -0.7178920739912988 -0.14430177605363062 2.2390250410995343
 }
 TexturedBackground {
 }
@@ -22,6 +23,36 @@ DEF falcon Robot {
   children [
     Pose {
       children [
+        DEF DS DistanceSensor {
+          translation 0.24 0.089 0.035
+          rotation 0 0 1 1.5708
+          children [
+            DEF ds_box Shape {
+              appearance PBRAppearance {
+              }
+              geometry Box {
+                size 0.0025 0.047 0.025
+              }
+            }
+            DEF ds_senzor Mir100UltrasonicSensor {
+              translation -0.008 0 0
+              rotation 0 0 -1 -5.307179586466759e-06
+              lookupTable [
+                0.01 0 2.5
+                0.35 0 0
+              ]
+            }
+          ]
+          boundingObject USE ds_box
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+          lookupTable [
+            0 0 0
+            1 1000 0
+          ]
+        }
         DEF kulicka BallJoint {
           jointParameters BallJointParameters {
             anchor -0.05 0 0.01
@@ -234,13 +265,13 @@ DEF falcon Robot {
   controller "Falcon_lib"
 }
 Robot {
-  translation -1.08191 0.174483 0
+  translation -1.08191 0.174483 0.0901
   rotation 0 0 1 0.261799
   children [
-    Pose {
+    DEF nakaldak Pose {
       children [
         DEF naklad Solid {
-          translation 0.07 0.17 0.0901
+          translation 0.07 0.17 0
           children [
             DEF nakald Shape {
               appearance PBRAppearance {
@@ -260,7 +291,6 @@ Robot {
           }
         }
         DEF kabina Solid {
-          translation 0 0 0.0901
           children [
             DEF kabina Shape {
               appearance PBRAppearance {
@@ -283,6 +313,7 @@ Robot {
     }
   ]
   name "havarovany_nakladak"
+  boundingObject USE kabina
   physics Physics {
     density -1
     mass 1.5
@@ -304,6 +335,7 @@ DEF naklad_1 Solid {
   ]
   boundingObject USE kostka
   physics Physics {
+    density -1
     mass 0.3
   }
 }
@@ -324,6 +356,7 @@ DEF naklad_2 Solid {
   name "solid(1)"
   boundingObject USE kostka
   physics Physics {
+    density -1
     mass 0.3
   }
 }
@@ -342,6 +375,27 @@ DEF naklad_3 Solid {
     }
   ]
   name "solid(2)"
+  boundingObject USE kostka
+  physics Physics {
+    density -1
+    mass 0.15
+  }
+}
+DEF naklad_3 Solid {
+  translation -1.29722 -0.041087 0.0305
+  rotation 0 0 -1 -1.3089953071795861
+  children [
+    DEF kostka Shape {
+      appearance PBRAppearance {
+        baseColor 0.14902 0.635294 0.411765
+        metalness 0
+      }
+      geometry Box {
+        size 0.06 0.06 0.06
+      }
+    }
+  ]
+  name "solid(5)"
   boundingObject USE kostka
   physics Physics {
     density -1
