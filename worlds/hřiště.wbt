@@ -4,12 +4,13 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/mir/mir100/protos/Mir100UltrasonicSensor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/solids/protos/SolidTorus.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.020161722141356763 0.9997428117456585 -0.010383415776128387 1.5344518471704656
-  position -0.7178920739912988 -0.14430177605363062 2.2390250410995343
+  orientation -0.080423609606841 0.16379201052120138 0.9832111778795178 1.3878372023304042
+  position -1.844763206048669 -3.17015997548972 1.2550815986510244
 }
 TexturedBackground {
 }
@@ -23,6 +24,149 @@ DEF falcon Robot {
   children [
     Pose {
       children [
+        DEF otaceni HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 0 1
+            anchor 0.22 0 0.075
+          }
+          device [
+            PositionSensor {
+            }
+            DEF ram0 RotationalMotor {
+              name "ram0"
+            }
+          ]
+          endPoint Solid {
+            translation 0.22 0 0.075
+            children [
+              DEF ram1_2 HingeJoint {
+                jointParameters HingeJointParameters {
+                  axis 0 1 0
+                  anchor -0.025 0 0.1
+                }
+                device [
+                  PositionSensor {
+                  }
+                  DEF ram1 RotationalMotor {
+                    name "ram1"
+                  }
+                ]
+                endPoint Solid {
+                  translation -0.004999999999999893 0 0.15
+                  rotation 0 1 0 0
+                  children [
+                    DEF ram2_3 HingeJoint {
+                      jointParameters HingeJointParameters {
+                        axis 0 1 0
+                        anchor 0 0 0.05
+                      }
+                      device [
+                        PositionSensor {
+                        }
+                        DEF ram2 RotationalMotor {
+                          name "ram2"
+                        }
+                      ]
+                      endPoint Solid {
+                        translation -1.0424269302054433e-11 0 0.1
+                        rotation 0 1 0 0
+                        children [
+                          DEF gripper VacuumGripper {
+                            translation 0 0 0.05
+                            children [
+                              DEF bobik SolidTorus {
+                                translation 0 0 0.005
+                                majorRadius 0.01
+                                minorRadius 0.005
+                                appearance PBRAppearance {
+                                  baseColor 0 0 0
+                                  baseColorMap ImageTexture {
+                                    url [
+                                      "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/worlds/textures/tagged_wall.jpg"
+                                    ]
+                                  }
+                                  roughness 0.5
+                                  metalness 0
+                                }
+                              }
+                            ]
+                            name "gripper"
+                            physics Physics {
+                              density -1
+                              mass 0.003
+                            }
+                          }
+                          DEF rameno2 Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.752941 0.380392 0.796078
+                              metalness 0
+                            }
+                            geometry Box {
+                              size 0.03 0.05 0.09
+                            }
+                          }
+                        ]
+                        name "solid(1)"
+                        boundingObject USE rameno2
+                        physics Physics {
+                          density -1
+                          mass 0.05
+                        }
+                      }
+                    }
+                    DEF rameno2 Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.752941 0.380392 0.796078
+                        metalness 0
+                      }
+                      geometry Box {
+                        size 0.04 0.05 0.09
+                      }
+                    }
+                  ]
+                  name "solid(1)"
+                  boundingObject USE rameno2
+                  physics Physics {
+                    density -1
+                    mass 0.12
+                  }
+                }
+              }
+              DEF rameno_1 Solid {
+                translation 0 0 0.05
+                children [
+                  DEF rameno1 Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.752941 0.380392 0.796078
+                      metalness 0
+                    }
+                    geometry Box {
+                      size 0.05 0.05 0.09
+                    }
+                  }
+                ]
+                boundingObject USE rameno1
+                physics Physics {
+                }
+              }
+              DEF podstava Shape {
+                appearance PBRAppearance {
+                  baseColor 0.964706 0.827451 0.176471
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.04
+                }
+              }
+            ]
+            name "solid(8)"
+            boundingObject USE podstava
+            physics Physics {
+              density -1
+              mass 0.2
+            }
+          }
+        }
         DEF DS DistanceSensor {
           translation 0.24 0.089 0.035
           rotation 0 0 1 1.5708
@@ -263,6 +407,7 @@ DEF falcon Robot {
     mass 2
   }
   controller "Falcon_lib"
+  selfCollision TRUE
 }
 Robot {
   translation -1.08191 0.174483 0.0901
@@ -316,8 +461,66 @@ Robot {
   boundingObject USE kabina
   physics Physics {
     density -1
-    mass 1.5
+    mass 0.7
   }
+}
+Robot {
+  translation 0.244577 0.943055 0.1001
+  rotation 0.7071082811855307 -2.510550998334532e-07 -0.7071052811843378 3.14159
+  children [
+    DEF nakaldak Pose {
+      children [
+        DEF naklad Solid {
+          translation 0.07 0.17 0
+          children [
+            DEF nakald Shape {
+              appearance PBRAppearance {
+                baseColor 0.101961 0.372549 0.705882
+                metalness 0
+              }
+              geometry Box {
+                size 0.06 0.24 0.18
+              }
+            }
+          ]
+          name "naklad(1)"
+          boundingObject USE nakald
+          physics Physics {
+            density -1
+            mass 0.5
+          }
+        }
+        DEF kabina Solid {
+          children [
+            DEF kabina Shape {
+              appearance PBRAppearance {
+                baseColor 0.101961 0.372549 0.705882
+                metalness 0
+              }
+              geometry Box {
+                size 0.2 0.1 0.18
+              }
+            }
+          ]
+          name "solid(1)"
+          boundingObject USE kabina
+          physics Physics {
+            density -1
+            mass 0.2
+          }
+        }
+      ]
+    }
+  ]
+  name "nakladak"
+  boundingObject USE kabina
+  physics Physics {
+    density -1
+    mass 0.7
+  }
+  locked TRUE
+  translationStep 0
+  rotationStep 0
 }
 DEF naklad_1 Solid {
   translation -1.33 0.16 0.0305
